@@ -11,7 +11,7 @@ router.get('/index', userController.index)
 // ============
 router.get('/',authenticate , userController.index)
 router.get('/find/:userId', authenticate ,userController.show)
-router.get('/account/:acc' , authenticate ,userController.findAccount)
+router.get('/account/:acc' ,userController.findAccount)
 router.get('/identity/:iden' , authenticate ,userController.findIdentity)
 router.post('/create' , authenticate ,userController.createUser)
 router.post('/update' , authenticate ,userController.updateUser)
