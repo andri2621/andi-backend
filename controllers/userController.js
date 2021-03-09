@@ -2,8 +2,8 @@ const User  = require('../models/user')
 const user  = require('../models/user')
 const {cleanCache}   = require('../middleware/clearCache')
 
-const index =   (req,res,next) => {
-    User.find().cache()
+const index = async  (req,res,next) => {
+    await User.find().cache()
     .then(data => {
         res.json({
             data
@@ -16,9 +16,9 @@ const index =   (req,res,next) => {
     })
 }
 
-const show  =   (req, res, next) => {
+const show  = async  (req, res, next) => {
     let userId  =   req.params.userId
-    User.findById(userId)
+    await User.findById(userId)
     .then(data => {
         res.json({
             data
@@ -31,8 +31,8 @@ const show  =   (req, res, next) => {
     })
 }
 
-const findAccount  =   (req, res, next) => {
-    User.findOne({accountNumber:req.params.acc})
+const findAccount  = async  (req, res, next) => {
+    await User.findOne({accountNumber:req.params.acc})
     .then(data => {
         res.json({
             message: 'data ditemukan',
@@ -46,8 +46,8 @@ const findAccount  =   (req, res, next) => {
     })
 }
 
-const findIdentity  =   (req, res, next) => {
-    User.findOne({identityNumber:req.params.iden})
+const findIdentity  = async  (req, res, next) => {
+    await User.findOne({identityNumber:req.params.iden})
     .then(data => {
         res.json({
             message: 'data ditemukan',
@@ -121,7 +121,7 @@ const createUser = async (req, res, next) => {
 
 }
 
-const updateUser    =    (req,res,next) => {
+const updateUser    =  async  (req,res,next) => {
     let userId = req.body.userId
 
     let updatedData = {
@@ -132,7 +132,7 @@ const updateUser    =    (req,res,next) => {
 
     }
 
-    User.findByIdAndUpdate(userId, {$set: updatedData})
+    await User.findByIdAndUpdate(userId, {$set: updatedData})
     .then(() => {
         res.json({
             message: 'Berhasil diubah'
@@ -145,9 +145,9 @@ const updateUser    =    (req,res,next) => {
     })
 }
 
-const deleteUser = ( req,res,next) => {
+const deleteUser = async ( req,res,next) => {
     let userId = req.params.userId
-    User.findByIdAndRemove(userId)
+    await User.findByIdAndRemove(userId)
     .then(()=>{
         res.json ({
             message: 'User deleted succesfully'
