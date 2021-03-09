@@ -6,7 +6,9 @@ const authController    =   require('../controllers/authController')
 const authenticate      =   require('../middleware/authenticate')
 
 
-
+// tes tanpa auth
+router.get('/index', userController.index)
+// ============
 router.get('/',authenticate , userController.index)
 router.get('/find/:userId', authenticate ,userController.show)
 router.get('/account/:acc' , authenticate ,userController.findAccount)
