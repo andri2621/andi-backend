@@ -3,7 +3,8 @@ const user  = require('../models/user')
 const {cleanCache}   = require('../middleware/clearCache')
 
 const index = async  (req,res,next) => {
-    await User.find().cache()
+    await User.find()
+    // .cache()
     .then(data => {
         res.json({
             data
